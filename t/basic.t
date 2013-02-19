@@ -26,4 +26,6 @@ ok $checklist->move_next, 'successful re-ordering';
 
 is $checklist->position, 2, 'Expected position #2';
 
+is $checklist->item_rs->first->completed, 0, 'Not complete';
+
 done_testing;

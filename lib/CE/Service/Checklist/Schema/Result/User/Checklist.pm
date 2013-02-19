@@ -17,7 +17,7 @@ column title => {
   data_type => 'varchar',
   size => '64'};
 
-column 'position' => { data_type => 'integer' };
+column position => { data_type => 'integer' };
 column copy => { data_type => 'text'};
 
 belongs_to user => '::User', 'user_id';

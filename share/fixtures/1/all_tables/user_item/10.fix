@@ -1,0 +1,7 @@
+$HASH1 = {
+           checklist_id => 4,
+           completed    => 0,
+           copy         => 'TODO 1',
+           item_id      => 10,
+           position     => 1
+         };

@@ -1,0 +1,9 @@
+$HASH1 = {
+           checklist_id
+                   => 3,
+           copy    => 'Junior Stuff Todo',
+           position
+                   => 3,
+           title   => 'Junior',
+           user_id => 1
+         };

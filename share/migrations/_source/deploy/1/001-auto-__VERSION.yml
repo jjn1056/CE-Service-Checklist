@@ -81,8 +81,6 @@ translator:
   filename: ~
   no_comments: 0
   parser_args:
-    DBIx::Class::Schema: ~
-    DBIx::Schema: ~
     package: &1 !!perl/hash:CE::Service::Checklist::Schema
       class_mappings:
         CE::Service::Checklist::Schema::Result::Checklist: Checklist
@@ -253,6 +251,9 @@ translator:
             checklist_id:
               data_type: integer
               is_foreign_key: 1
+            completed:
+              data_type: boolean
+              default_value: 0
             copy:
               data_type: text
             item_id:
@@ -266,6 +267,7 @@ translator:
             - checklist_id
             - position
             - copy
+            - completed
           _primaries: &6
             - item_id
           _relationships:
@@ -322,7 +324,7 @@ translator:
           schema: *1
           source_name: __VERSION
       storage: !!perl/hash:DBIx::Class::Storage::DBI::SQLite
-        _conn_pid: 3822
+        _conn_pid: 7475
         _connect_info:
           - DBI:SQLite:/Users/john/Desktop/CE-Service-Checklist/share/ce-service-checklist-schema.db
           - ''

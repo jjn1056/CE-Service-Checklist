@@ -6,11 +6,11 @@
       },
       {
          "quantity" : "all",
-         "class" : "User::Checklist"
+         "class" : "UserChecklist"
       },
       {
          "quantity" : "all",
-         "class" : "User::Item"
+         "class" : "UserItem"
       },
       {
          "quantity" : "all",

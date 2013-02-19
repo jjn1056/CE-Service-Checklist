@@ -1,6 +1,6 @@
 -- 
 -- Created by SQL::Translator::Producer::SQLite
--- Created on Tue Feb 19 12:58:53 2013
+-- Created on Tue Feb 19 15:12:18 2013
 -- 
 
 ;
@@ -49,6 +49,7 @@ CREATE TABLE user_item (
   checklist_id integer NOT NULL,
   position integer NOT NULL,
   copy text NOT NULL,
+  completed boolean NOT NULL DEFAULT 0,
   FOREIGN KEY (checklist_id) REFERENCES user_checklist(checklist_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE INDEX user_item_idx_checklist_id ON user_item (checklist_id);

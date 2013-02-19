@@ -13,8 +13,13 @@ column checklist_id => {
   data_type => 'integer',
   is_foreign_key => 1};
 
-column 'position' => { data_type => 'integer' };
+column position => { data_type => 'integer' };
 column copy => { data_type => 'text'};
+
+column completed => {
+  data_type => 'boolean',
+  default_value => 0 };
+
 
 belongs_to checklist => '::User::Checklist', 'checklist_id';
 

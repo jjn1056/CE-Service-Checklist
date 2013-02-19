@@ -1,6 +1,6 @@
 -- 
 -- Created by SQL::Translator::Producer::SQLite
--- Created on Tue Feb 19 11:52:46 2013
+-- Created on Tue Feb 19 12:58:53 2013
 -- 
 
 ;
@@ -36,6 +36,7 @@ CREATE TABLE user_checklist (
   checklist_id INTEGER PRIMARY KEY NOT NULL,
   user_id integer NOT NULL,
   title varchar(64) NOT NULL,
+  position integer NOT NULL,
   copy text NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -46,6 +47,7 @@ CREATE INDEX user_checklist_idx_user_id ON user_checklist (user_id);
 CREATE TABLE user_item (
   item_id INTEGER PRIMARY KEY NOT NULL,
   checklist_id integer NOT NULL,
+  position integer NOT NULL,
   copy text NOT NULL,
   FOREIGN KEY (checklist_id) REFERENCES user_checklist(checklist_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -1,6 +1,7 @@
 package CE::Service::Checklist::Schema::Result::User::Item;
 
-use CE::Service::Checklist::Schema::Candy;
+use CE::Service::Checklist::Schema::Candy
+  -components => ['Ordered'];
 
 table 'user_item';
 
@@ -12,9 +13,13 @@ column checklist_id => {
   data_type => 'integer',
   is_foreign_key => 1};
 
-column copy => { data_type => 'text' };
+column 'position' => { data_type => 'integer' };
+column copy => { data_type => 'text'};
 
 belongs_to checklist => '::User::Checklist', 'checklist_id';
+
+__PACKAGE__->position_column('position');
+__PACKAGE__->grouping_column('checklist_id');
 
 1;
 

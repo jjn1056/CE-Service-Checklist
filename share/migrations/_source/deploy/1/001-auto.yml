@@ -196,6 +196,16 @@ schema:
           is_primary_key: 0
           is_unique: 0
           name: copy
+          order: 5
+          size:
+            - 0
+        position:
+          data_type: integer
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: position
           order: 4
           size:
             - 0
@@ -273,7 +283,7 @@ schema:
           is_primary_key: 0
           is_unique: 0
           name: copy
-          order: 3
+          order: 4
           size:
             - 0
         item_id:
@@ -285,6 +295,16 @@ schema:
           is_unique: 0
           name: item_id
           order: 1
+          size:
+            - 0
+        position:
+          data_type: integer
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: position
+          order: 3
           size:
             - 0
       indices:
@@ -423,6 +443,8 @@ translator:
               is_auto_increment: 1
             copy:
               data_type: text
+            position:
+              data_type: integer
             title:
               data_type: varchar
               size: 64
@@ -434,6 +456,7 @@ translator:
             - checklist_id
             - user_id
             - title
+            - position
             - copy
           _primaries: &5
             - checklist_id
@@ -477,10 +500,13 @@ translator:
             item_id:
               data_type: integer
               is_auto_increment: 1
+            position:
+              data_type: integer
           _columns_info_loaded: 0
           _ordered_columns:
             - item_id
             - checklist_id
+            - position
             - copy
           _primaries: &6
             - item_id
@@ -538,7 +564,7 @@ translator:
           schema: *1
           source_name: __VERSION
       storage: !!perl/hash:DBIx::Class::Storage::DBI::SQLite
-        _conn_pid: 3520
+        _conn_pid: 3822
         _connect_info:
           - DBI:SQLite:/Users/john/Desktop/CE-Service-Checklist/share/ce-service-checklist-schema.db
           - ''
@@ -565,8 +591,8 @@ translator:
         schema: *1
         transaction_depth: 0
     sources:
-      - User::Checklist
       - Item
+      - User::Checklist
       - User::Item
       - Checklist
       - User

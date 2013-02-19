@@ -2,11 +2,11 @@
    "sets" : [
       {
          "quantity" : "all",
-         "class" : "User::Checklist"
+         "class" : "Item"
       },
       {
          "quantity" : "all",
-         "class" : "Item"
+         "class" : "User::Checklist"
       },
       {
          "quantity" : "all",

@@ -201,6 +201,8 @@ translator:
               is_auto_increment: 1
             copy:
               data_type: text
+            position:
+              data_type: integer
             title:
               data_type: varchar
               size: 64
@@ -212,6 +214,7 @@ translator:
             - checklist_id
             - user_id
             - title
+            - position
             - copy
           _primaries: &5
             - checklist_id
@@ -255,10 +258,13 @@ translator:
             item_id:
               data_type: integer
               is_auto_increment: 1
+            position:
+              data_type: integer
           _columns_info_loaded: 0
           _ordered_columns:
             - item_id
             - checklist_id
+            - position
             - copy
           _primaries: &6
             - item_id
@@ -316,7 +322,7 @@ translator:
           schema: *1
           source_name: __VERSION
       storage: !!perl/hash:DBIx::Class::Storage::DBI::SQLite
-        _conn_pid: 3520
+        _conn_pid: 3822
         _connect_info:
           - DBI:SQLite:/Users/john/Desktop/CE-Service-Checklist/share/ce-service-checklist-schema.db
           - ''

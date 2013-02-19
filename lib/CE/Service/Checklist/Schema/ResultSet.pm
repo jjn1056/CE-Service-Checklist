@@ -11,7 +11,6 @@ __PACKAGE__->load_components(qw/
   Helper::ResultSet::SetOperations
   Helper::ResultSet::ResultClassDWIM
   Helper::ResultSet::RemoveColumns
-  Helper::ResultSet::AutoRemoveColumns
   Helper::ResultSet::NoColumns  
   Helper::ResultSet::SearchOr 
   Helper::ResultSet::Shortcut  

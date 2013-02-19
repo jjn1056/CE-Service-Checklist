@@ -1,0 +1,352 @@
+---
+schema:
+  procedures: {}
+  tables:
+    dbix_class_deploymenthandler_versions:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - version
+          match_type: ''
+          name: dbix_class_deploymenthandler_versions_version
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+      fields:
+        ddl:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: ddl
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: int
+          default_value: ~
+          is_auto_increment: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 0
+        upgrade_sql:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: upgrade_sql
+          order: 4
+          size:
+            - 0
+        version:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: version
+          order: 2
+          size:
+            - 50
+      indices: []
+      name: dbix_class_deploymenthandler_versions
+      options: []
+      order: 1
+  triggers: {}
+  views: {}
+translator:
+  add_drop_table: 0
+  filename: ~
+  no_comments: 0
+  parser_args:
+    DBIx::Class::Schema: ~
+    DBIx::Schema: ~
+    package: &1 !!perl/hash:CE::Service::Checklist::Schema
+      class_mappings:
+        CE::Service::Checklist::Schema::Result::Checklist: Checklist
+        CE::Service::Checklist::Schema::Result::Item: Item
+        CE::Service::Checklist::Schema::Result::User: User
+        CE::Service::Checklist::Schema::Result::User::Checklist: User::Checklist
+        CE::Service::Checklist::Schema::Result::User::Item: User::Item
+        DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult: __VERSION
+      source_registrations:
+        Checklist: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            checklist_id:
+              data_type: integer
+              is_auto_increment: 1
+            copy:
+              data_type: text
+            title:
+              data_type: varchar
+              size: 64
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - checklist_id
+            - title
+            - copy
+          _primaries: &2
+            - checklist_id
+          _relationships:
+            item_rs:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: CE::Service::Checklist::Schema::Result::Item
+              cond:
+                foreign.checklist_id: self.checklist_id
+              source: CE::Service::Checklist::Schema::Result::Item
+          _unique_constraints:
+            primary: *2
+          name: checklist
+          result_class: CE::Service::Checklist::Schema::Result::Checklist
+          resultset_attributes: {}
+          resultset_class: CE::Service::Checklist::Schema::DefaultRS
+          schema: *1
+          source_name: Checklist
+        Item: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            checklist_id:
+              data_type: integer
+              is_foreign_key: 1
+            copy:
+              data_type: text
+            item_id:
+              data_type: integer
+              is_auto_increment: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - item_id
+            - checklist_id
+            - copy
+          _primaries: &3
+            - item_id
+          _relationships:
+            checklist:
+              attrs:
+                accessor: single
+                fk_columns:
+                  checklist_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: CE::Service::Checklist::Schema::Result::Checklist
+              cond:
+                foreign.checklist_id: self.checklist_id
+              source: CE::Service::Checklist::Schema::Result::Checklist
+          _unique_constraints:
+            primary: *3
+          name: item
+          result_class: CE::Service::Checklist::Schema::Result::Item
+          resultset_attributes: {}
+          resultset_class: CE::Service::Checklist::Schema::DefaultRS
+          schema: *1
+          source_name: Item
+        User: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            user_id:
+              data_type: integer
+              is_auto_increment: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - user_id
+          _primaries: &4
+            - user_id
+          _relationships:
+            checklist_rs:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: CE::Service::Checklist::Schema::Result::User::Checklist
+              cond:
+                foreign.user_id: self.user_id
+              source: CE::Service::Checklist::Schema::Result::User::Checklist
+          _unique_constraints:
+            primary: *4
+          name: user
+          result_class: CE::Service::Checklist::Schema::Result::User
+          resultset_attributes: {}
+          resultset_class: CE::Service::Checklist::Schema::ResultSet::User
+          schema: *1
+          source_name: User
+        User::Checklist: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            checklist_id:
+              data_type: integer
+              is_auto_increment: 1
+            copy:
+              data_type: text
+            title:
+              data_type: varchar
+              size: 64
+            user_id:
+              data_type: integer
+              is_foreign_key: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - checklist_id
+            - user_id
+            - title
+            - copy
+          _primaries: &5
+            - checklist_id
+          _relationships:
+            item_rs:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: CE::Service::Checklist::Schema::Result::User::Item
+              cond:
+                foreign.checklist_id: self.checklist_id
+              source: CE::Service::Checklist::Schema::Result::User::Item
+            user:
+              attrs:
+                accessor: single
+                fk_columns:
+                  user_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: CE::Service::Checklist::Schema::Result::User
+              cond:
+                foreign.user_id: self.user_id
+              source: CE::Service::Checklist::Schema::Result::User
+          _unique_constraints:
+            primary: *5
+          name: user_checklist
+          result_class: CE::Service::Checklist::Schema::Result::User::Checklist
+          resultset_attributes: {}
+          resultset_class: CE::Service::Checklist::Schema::DefaultRS
+          schema: *1
+          source_name: User::Checklist
+        User::Item: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            checklist_id:
+              data_type: integer
+              is_foreign_key: 1
+            copy:
+              data_type: text
+            item_id:
+              data_type: integer
+              is_auto_increment: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - item_id
+            - checklist_id
+            - copy
+          _primaries: &6
+            - item_id
+          _relationships:
+            checklist:
+              attrs:
+                accessor: single
+                fk_columns:
+                  checklist_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: CE::Service::Checklist::Schema::Result::User::Checklist
+              cond:
+                foreign.checklist_id: self.checklist_id
+              source: CE::Service::Checklist::Schema::Result::User::Checklist
+          _unique_constraints:
+            primary: *6
+          name: user_item
+          result_class: CE::Service::Checklist::Schema::Result::User::Item
+          resultset_attributes: {}
+          resultset_class: CE::Service::Checklist::Schema::DefaultRS
+          schema: *1
+          source_name: User::Item
+        __VERSION: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            ddl:
+              data_type: text
+              is_nullable: 1
+            id:
+              data_type: int
+              is_auto_increment: 1
+            upgrade_sql:
+              data_type: text
+              is_nullable: 1
+            version:
+              data_type: varchar
+              size: 50
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - version
+            - ddl
+            - upgrade_sql
+          _primaries: &7
+            - id
+          _relationships: {}
+          _unique_constraints:
+            dbix_class_deploymenthandler_versions_version:
+              - version
+            primary: *7
+          name: dbix_class_deploymenthandler_versions
+          result_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResultSet
+          schema: *1
+          source_name: __VERSION
+      storage: !!perl/hash:DBIx::Class::Storage::DBI::SQLite
+        _conn_pid: 3520
+        _connect_info:
+          - DBI:SQLite:/Users/john/Desktop/CE-Service-Checklist/share/ce-service-checklist-schema.db
+          - ''
+          - ''
+        _dbh: !!perl/hash:DBI::db {}
+        _dbh_autocommit: 1
+        _dbh_details: {}
+        _dbh_gen: 0
+        _dbi_connect_info:
+          - DBI:SQLite:/Users/john/Desktop/CE-Service-Checklist/share/ce-service-checklist-schema.db
+          - ''
+          - ''
+          - &8
+            AutoCommit: 1
+            PrintError: 0
+            RaiseError: 1
+            ShowErrorStatement: 1
+        _dbic_connect_attributes: *8
+        _driver_determined: 1
+        _in_do_block: 0
+        _sql_maker: ~
+        _sql_maker_opts: {}
+        savepoints: []
+        schema: *1
+        transaction_depth: 0
+    sources:
+      - __VERSION
+  parser_type: SQL::Translator::Parser::DBIx::Class
+  producer_args: {}
+  producer_type: SQL::Translator::Producer::YAML
+  show_warnings: 0
+  trace: 0
+  version: 0.11016

@@ -12,8 +12,8 @@ has_many checklist_rs => '::User::Checklist', 'user_id';
 
 sub init_checklists_from {
   my ($self, $checklist_rs) = @_;
-  foreach my $checklist($checklist->all) {
-    my $user_checklist = $user
+  foreach my $checklist ($checklist_rs->all) {
+    my $user_checklist = $self
       ->create_related('checklist_rs',
         {title=>$checklist->title, copy=>$checklist->copy});
     foreach my $item ($checklist->item_rs->all) {

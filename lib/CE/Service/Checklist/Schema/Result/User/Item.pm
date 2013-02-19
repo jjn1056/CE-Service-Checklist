@@ -10,10 +10,9 @@ primary_column item_id => {
 
 column checklist_id => {
   data_type => 'integer',
-  is_foreign_key => 1}
+  is_foreign_key => 1};
 
-column copy => {
-  data_type => 'text'};
+column copy => { data_type => 'text' };
 
 belongs_to checklist => '::User::Checklist', 'checklist_id';
 

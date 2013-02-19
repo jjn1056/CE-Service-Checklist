@@ -10,7 +10,7 @@ primary_column checklist_id => {
 
 column user_id => {
   data_type => 'integer',
-  is_foreign_key => 1}
+  is_foreign_key => 1};
 
 column title => {
   data_type => 'varchar',

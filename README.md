@@ -10,7 +10,7 @@ CE::Service::Checklist - Exampel Checklist Service
 
 The following modules or resources may be of interest.
 
-[DBIx::Class](http://search.cpan.org/perldoc?DBIx::Class), [Web::Simpl](http://search.cpan.org/perldoc?Web::Simpl), [Plack](http://search.cpan.org/perldoc?Plack)
+[DBIx::Class](http://search.cpan.org/perldoc?DBIx::Class), [Web::Simple](http://search.cpan.org/perldoc?Web::Simple), [Plack](http://search.cpan.org/perldoc?Plack)
 
 You should also review the `dist.ini` file for the full list of dependencies
 

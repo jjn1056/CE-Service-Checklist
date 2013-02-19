@@ -19,7 +19,7 @@ L<CE::Service::Checklist> is an example web service application
 
 The following modules or resources may be of interest.
 
-L<DBIx::Class>, L<Web::Simpl>, L<Plack>
+L<DBIx::Class>, L<Web::Simple>, L<Plack>
 
 You should also review the C<dist.ini> file for the full list of dependencies
 

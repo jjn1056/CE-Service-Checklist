@@ -1,44 +1,40 @@
 package CE::Service::Checklist::Web;
 
-use JSON;
 use Web::Simple;
 use DBIx::Class::Migration;
 use HTTP::Throwable::Factory 'http_exception';
+use JSON;
 
 my $schema = DBIx::Class::Migration
   ->new(schema_class => 'CE::Service::Checklist::Schema')
   ->schema;
 
+sub as_json {
+  [200, ['Content-Type' => 'application/json'],
+    [encode_json(shift)] ];
+}
+
 sub dispatch_request {
-  sub (/*...) {
-    my ($self, $id) = @_;
-    my $user = $schema->resultset('User')->find($id)
+  my $self = shift;
+
+  sub (/*:id...) {
+    my $user = $schema->resultset('User')->find($_{id})
       || return http_exception 'NotFound';
 
     sub(GET + ~) {
-      my @checklists = $user->checklist_rs->all;
-      as_json(map {
-        +{title => $_->title,
-          link => "/${\$user->id}/${\$_->id}"} }
-        @checklists);    
+      as_json [$user->checklist_rs->map(sub { 
+        +{ title => $_->title,
+          link => "/${\$user->id}/${\$_->id}" }
+      })];
     },
 
-    sub(/*) {
-      my ($self, $id) = @_;
-      my $checklist = $user->checklist_rs->find($id)
+    sub(/*:id) {
+      my $checklist = $user->checklist_rs->find($_{id})
         || return http_exception 'NotFound';
 
-      sub(GET) {
-        as_json($checklist->get_columns);
-      }
-    }
-
+      sub(GET) { as_json [$checklist->get_columns] },
+    },
   },
-}
-
-sub as_json {
-  return [200, ['Content-Type' => 'application/json'],
-    [encode_json(\@_)] ];
 }
 
 __PACKAGE__->run_if_script;
